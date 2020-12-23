@@ -1,15 +1,38 @@
 # flutter_tencent_captcha
 
-flutter_tencent_captcha
+flutter 插件
+腾讯验证码服务 的flutter 插件
 
-## Getting Started
+### how to use
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+##💻 添加依赖 在 pubspec.yaml中添加:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    flutter_tencent_captcha: ^0.0.1
 
+## 然后使用即可.
+
+    '''
+    void _handleClickVerify() async {
+        TencentCaptchaConfig config = TencentCaptchaConfig(
+          appId: "your appid",
+          bizState: 'roobo-tencent-captcha',
+          enableDarkMode: true,
+          needFeedBack: false,
+        );
+        await TencentCaptcha.verify(
+          config: config,
+          onLoaded: (dynamic data) {
+            your code
+          },
+          onSuccess: (dynamic data) {
+            your code
+          },
+          onFail: (dynamic data) {
+            your code
+          },
+        );
+      }
+
+    '''
+
+## 效果图
