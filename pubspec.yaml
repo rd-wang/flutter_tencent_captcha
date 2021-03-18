@@ -1,17 +1,15 @@
 name: flutter_tencent_captcha
 description: flutter  tencent_captcha
-version: 0.0.1
-author: rd
+version: 0.1.0
 homepage: http://gerrit.365jiating.com:8080/#/admin/projects/flutter/tencentCaptcha
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.20.0 <2.0.0"
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

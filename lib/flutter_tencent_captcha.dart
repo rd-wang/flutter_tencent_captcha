@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 const _kMethodChannelName = 'flutter_tencent_captcha';
@@ -13,8 +12,8 @@ class TencentCaptcha {
 
   static bool _eventChannelReadied = false;
 
-  static Future<String> get sdkVersion async {
-    final String sdkVersion = await _methodChannel.invokeMethod('getSDKVersion');
+  static Future<String?> get sdkVersion async {
+    final String? sdkVersion = await _methodChannel.invokeMethod('getSDKVersion');
     return sdkVersion;
   }
 
@@ -32,26 +31,26 @@ class TencentCaptcha {
 
     switch (method) {
       case 'onLoaded':
-        if (_verifyOnLoaded != null) _verifyOnLoaded(data);
+        if (_verifyOnLoaded != null) _verifyOnLoaded!(data);
         break;
       case 'onSuccess':
-        if (_verifyOnSuccess != null) _verifyOnSuccess(data);
+        if (_verifyOnSuccess != null) _verifyOnSuccess!(data);
         break;
       case 'onFail':
-        if (_verifyOnFail != null) _verifyOnFail(data);
+        if (_verifyOnFail != null) _verifyOnFail!(data);
         break;
     }
   }
 
-  static Function(dynamic) _verifyOnLoaded;
-  static Function(dynamic) _verifyOnSuccess;
-  static Function(dynamic) _verifyOnFail;
+  static Function(dynamic)? _verifyOnLoaded;
+  static Function(dynamic)? _verifyOnSuccess;
+  static Function(dynamic)? _verifyOnFail;
 
-  static Future<bool> verify({
-    @required TencentCaptchaConfig config,
-    Function(dynamic data) onLoaded,
-    Function(dynamic data) onSuccess,
-    Function(dynamic data) onFail,
+  static Future<bool?> verify({
+    required TencentCaptchaConfig config,
+    Function(dynamic data)? onLoaded,
+    Function(dynamic data)? onSuccess,
+    Function(dynamic data)? onFail,
   }) async {
     _verifyOnLoaded = onLoaded;
     _verifyOnSuccess = onSuccess;
@@ -74,14 +73,14 @@ class TencentCaptchaConfig {
 
   // 示例 {"width": 140, "height": 140}
   // 移动端原生webview调用时传入，为设置的验证码弹框大小。
-  Map<String, dynamic> sdkOpts;
+  Map<String, dynamic>? sdkOpts;
 
   // 隐藏帮助按钮。
   // 示例 { needFeedBack: false }
   bool needFeedBack;
 
   TencentCaptchaConfig({
-    @required this.appId,
+    required this.appId,
     this.bizState,
     this.enableDarkMode = false,
     this.sdkOpts,
@@ -90,11 +89,11 @@ class TencentCaptchaConfig {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> jsonObject = Map<String, dynamic>();
-    if (appId != null) jsonObject.putIfAbsent("appId", () => appId);
+    jsonObject.putIfAbsent("appId", () => appId);
     if (bizState != null) jsonObject.putIfAbsent("bizState", () => bizState);
-    if (enableDarkMode != null) jsonObject.putIfAbsent("enableDarkMode", () => enableDarkMode);
+    jsonObject.putIfAbsent("enableDarkMode", () => enableDarkMode);
     if (sdkOpts != null) jsonObject.putIfAbsent("sdkOpts", () => sdkOpts);
-    if (needFeedBack != null) jsonObject.putIfAbsent("needFeedBack", () => needFeedBack);
+    jsonObject.putIfAbsent("needFeedBack", () => needFeedBack);
 
     return jsonObject;
   }

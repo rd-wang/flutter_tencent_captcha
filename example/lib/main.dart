@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _sdkVersion = 'Unknown';
+  String? _sdkVersion = 'Unknown';
   List<String> _logs = [];
 
   @override
@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String sdkVersion;
+    String? sdkVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       sdkVersion = await TencentCaptcha.sdkVersion;
