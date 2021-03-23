@@ -57,7 +57,7 @@ class TencentCaptcha {
     _verifyOnFail = onFail;
 
     return await _methodChannel.invokeMethod('verify', {
-      'config': json.encode(config?.toJson()),
+      'config': json.encode(config.toJson()),
     });
   }
 }

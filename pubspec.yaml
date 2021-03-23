@@ -1,6 +1,6 @@
 name: flutter_tencent_captcha
 description: flutter  tencent_captcha
-version: 0.1.0
+version: 0.1.1
 homepage: http://gerrit.365jiating.com:8080/#/admin/projects/flutter/tencentCaptcha
 
 environment:
