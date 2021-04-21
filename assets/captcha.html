@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -17,7 +17,8 @@
 <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
 
 <script type="text/javascript">
-    const bridgeMethod = (method, data) => {
+
+    function bridgeMethod(method, data)  {
         if (window.webkit) {
           window.webkit.messageHandlers[method].postMessage(data);
         } else if (window.jsBridge) {
@@ -27,22 +28,25 @@
         }
       };
 
-    const bridgeOnLoaded = (data) => bridgeMethod("onLoaded", data);
-    const bridgeOnSuccess = (data) => bridgeMethod("onSuccess", data);
-    const bridgeOnFail = (data) => bridgeMethod("onFail", data);
+    function bridgeOnLoaded(data) {bridgeMethod("onLoaded", data)};
+    function bridgeOnSuccess(data) {bridgeMethod("onSuccess", data)};
+    function bridgeOnFail(data) {bridgeMethod("onFail", data)};
 
-    const verify = (configJsonString) => {
-        let config = JSON.parse(configJsonString);
-        config = Object.assign(config, {
-          ready: (data) => {
+    function verify(configJsonString) {
+        var config = JSON.parse(configJsonString);
+        config.ready=function(data) {
             bridgeOnLoaded(data);
-          },
-        });
-        let appId = config.appId;
+          }
+<!--        config = Object.assign(config, {-->
+<!--          ready:function(data) {-->
+<!--            bridgeOnLoaded(data);-->
+<!--          },-->
+<!--        });-->
+        var appId = config.appId;
         delete config.appId;
         const txCaptcha = new TencentCaptcha(
           appId,
-          (res) => {
+          function(res) {
             if (res.ret === 0) {
               bridgeOnSuccess(res);
             } else {
